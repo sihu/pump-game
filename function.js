@@ -6,13 +6,17 @@ $( document ).bind( 'mobileinit', function(){
 });
 
 $(() => {
+  const pumpEl = $('#pump');
+  const pumpUpEl = $('.pump-top');
+  const wonEl = $('.won');
+  const progressBar = $('.progress-bar');
   let progress = 0;
   let deflateInterval;
   let difficulty = 3;
 
   restart();
-  $('.won').hide();
-  $("#pump").bind("tap", inflate);
+  wonEl.hide();
+  pumpEl.bind("tap", inflate);
   $("#restart").click(() => {
     restart();
   });
@@ -22,8 +26,9 @@ $(() => {
   });
 
   function restart() {
-    $('.won').hide();
-    $("#pump").bind("tap", inflate);
+    pumpUpEl.removeClass('won');
+    wonEl.hide();
+    pumpEl.bind("tap", inflate);
     deflateInterval = setInterval(() => {
       deflate();
     }, 200);
@@ -32,8 +37,9 @@ $(() => {
 
   function inflate(event) {
     progress += difficulty;
-    $('.pump-top').animate({'background-position-y': "25px"}, 10, 'linear', () => {
-      $('.pump-top').animate({'background-position-y': "0px"}, 20);
+    pumpUpEl.clearQueue();
+    pumpUpEl.animate({'background-position-y': "25px"}, 10, 'linear', () => {
+      pumpUpEl.animate({'background-position-y': "0px"}, 200);
     });
     progress = progress > 100 ? 100 : progress;
     if (progress == 100) {
@@ -52,11 +58,12 @@ $(() => {
 
   function won() {
     clearInterval(deflateInterval);
-    $('.won').show();
+    wonEl.show();
+    pumpUpEl.addClass('won');
   }
 
   function setProgess() {
-    $(".progress-bar").css('width', `${progress}%`);
-    $(".progress-bar").html(`${progress} %`);
+    progressBar.css('width', `${progress}%`);
+    progressBar.html(`${progress} %`);
   }
 });

@@ -23,13 +23,16 @@ body {
 .pump-top,
 .pump-bottom {
   position: absolute;
-  background-position: 0px 0px;
+  background-position-y: 0px;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
 }
 .pump-top {
   background-image: url('images/pump_top.png');
+}
+.pump-top.won {
+  background-position-y: 25px!important;
 }
 .pump-bottom {
   background-image: url('images/pump_bottom.png');
