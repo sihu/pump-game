@@ -37,8 +37,12 @@ body {
 .pump-bottom {
   background-image: url('images/pump_bottom.png');
 }
-.alert-success {
+.alert-success, #restart {
   margin-top: 20px;
+}
+#restart {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .ui-radio .ui-btn.ui-radio-on:after {
   padding: 4px;
